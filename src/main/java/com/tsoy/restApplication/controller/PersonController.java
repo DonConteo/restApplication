@@ -13,7 +13,7 @@ public class PersonController {
 
     Repository repo = new Repository();
 
-    @GetMapping("/allPersons")
+    @GetMapping
     public List<Person> persons(){
         return repo.persons();
     }
@@ -28,23 +28,18 @@ public class PersonController {
         return repo.personById(id);
     }
 
-    @PostMapping("/deletePerson")
-    public void deletePerson(
+    @RequestMapping("/deletePerson/personId")
+    public List<Person> deletePerson(
             @RequestParam(value = "id") long id){
-        repo.deletePerson(byId(id));
+        repo.deletePerson(id);
+        return repo.persons();
     }
 
-    @PostMapping("/updatePerson")
+    @RequestMapping("/createPerson")
     public Person createPerson(
             @RequestParam(value = "id") long id,
             @RequestParam(value = "name") String name){
-        Person person = repo.personById(id);
-        if (person == null){
-            return repo.createPerson(new Person(id, name, new ArrayList<>()));
-        }
-        else {
-            person.setName(name);
-            return person;
-        }
+        repo.createPerson(id, name);
+        return repo.personById(id);
     }
 }

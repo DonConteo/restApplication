@@ -79,12 +79,23 @@ public class Repository {
                 .orElseThrow();
     }
 
-    public Person createPerson(Person p){
-        persons.add(p);
-        return p;
+    public void createPerson(long id, String name){
+        for(int i = 0; i < persons.size(); i++){
+            if(id == persons.get(i).getId()){
+                break;
+            }
+            else {
+                Person pers = new Person(id, name, new ArrayList<>());
+                persons.add(pers);
+            }
+        }
     }
 
-    public void deletePerson(Person p){
+    public void deletePerson(long id){
+        Person p = persons.stream()
+                .filter(person -> person.getId() == id)
+                .findFirst()
+                .orElseThrow();
         persons.remove(p);
         p = null;
     }
