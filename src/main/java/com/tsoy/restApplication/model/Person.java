@@ -6,24 +6,8 @@ public class Person {
 
     private long id;
     private String name;
-    private List<PhoneBook> phoneBook;
-    ////////////////////////////////////////////////////
-    private List<Long> pbNew;
 
-    public List<Long> getPbNew() {
-        return pbNew;
-    }
-
-    public void setPbNew(List<Long> pbNew) {
-        this.pbNew = pbNew;
-    }
-    ////////////////////////////////////////////////////
-
-    public Person(long id, String name, List<PhoneBook> phoneBook) {
-        this.id = id;
-        this.name = name;
-        this.phoneBook = phoneBook;
-    }
+    private List<Long> phoneBook;
 
     public Person(String name) {
         this.name = name;
@@ -43,10 +27,11 @@ public class Person {
         this.name = name;
     }
 
-    public List<PhoneBook> getPhoneBook() {
+    public List<Long> getPhoneBook() {
         return phoneBook;
     }
-    public void setPhoneBook(List<PhoneBook> phoneBook) {
-        this.phoneBook = phoneBook;
+
+    public void setPhoneBook(List<Long> pbNew) {
+        this.phoneBook = pbNew;
     }
 }

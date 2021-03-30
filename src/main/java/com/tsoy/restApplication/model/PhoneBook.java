@@ -1,38 +1,33 @@
 package com.tsoy.restApplication.model;
 
+import java.util.Map;
+
 public class PhoneBook {
+    long id;
+    Map<String, String> records;
 
-    long contactId;
-    String number;
-    String contactName;
-
-    public PhoneBook(long contactId, String number, String contactName) {
-        this.contactId = contactId;
-        this.number = number;
-        this.contactName = contactName;
+    public PhoneBook(long id, Map<String, String> records) {
+        this.id = id;
+        this.records = records;
     }
 
-    public long getContactId() {
-        return contactId;
+    public PhoneBook(long id) {
+        this.id = id;
     }
 
-    public void setContactId(long contactId) {
-        this.contactId = contactId;
+    public long getId() {
+        return id;
     }
 
-    public String getNumber() {
-        return number;
+    public void setId(long id) {
+        this.id = id;
     }
 
-    public void setNumber(String number) {
-        this.number = number;
+    public Map<String, String> getRecords() {
+        return records;
     }
 
-    public String getContactName() {
-        return contactName;
-    }
-
-    public void setContactName(String contactName) {
-        this.contactName = contactName;
+    public void setRecords(Map<String, String> records) {
+        this.records = records;
     }
 }
