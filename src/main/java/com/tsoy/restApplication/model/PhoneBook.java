@@ -1,4 +1,4 @@
-package com.tsoy.restApplication.Models;
+package com.tsoy.restApplication.model;
 
 public class PhoneBook {
 

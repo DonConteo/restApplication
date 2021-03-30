@@ -1,17 +1,24 @@
 package com.tsoy.restApplication.controller;
 
-import com.tsoy.restApplication.Models.Person;
+import com.tsoy.restApplication.model.Person;
 import com.tsoy.restApplication.repo.Repository;
+import com.tsoy.restApplication.service.PersonService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/persons")
+@RequestMapping("/person")
 public class PersonController {
 
     Repository repo = new Repository();
+    private PersonService personService;
+
+    public PersonController(PersonService personService) {
+        this.personService = personService;
+    }
 
     @GetMapping
     public List<Person> persons(){
@@ -41,5 +48,20 @@ public class PersonController {
             @RequestParam(value = "name") String name){
         repo.createPerson(id, name);
         return repo.personById(id);
+    }
+
+
+    /////////////////////////////////////////////////////////
+
+    @GetMapping("/new/{name}")
+    public Person create(@PathVariable String name){
+        return personService.create(name);
+    }
+    @GetMapping("/get/{id}")
+    public ResponseEntity<Person> getById(@PathVariable long id){
+        Person person = personService.getById(id);
+        return person != null
+                ? new ResponseEntity<>(person, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

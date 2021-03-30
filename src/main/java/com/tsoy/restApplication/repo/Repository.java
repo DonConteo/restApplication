@@ -1,12 +1,12 @@
 package com.tsoy.restApplication.repo;
 
-import com.tsoy.restApplication.Models.Person;
-import com.tsoy.restApplication.Models.PhoneBook;
+import com.tsoy.restApplication.model.Person;
+import com.tsoy.restApplication.model.PhoneBook;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class Repository {
+public class Repository{
 
     static List<Person> persons = new ArrayList<>();
     static List<PhoneBook> phoneBooks = new ArrayList<>();
