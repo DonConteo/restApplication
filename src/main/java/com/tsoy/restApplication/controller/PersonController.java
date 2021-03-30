@@ -1,85 +1,50 @@
 package com.tsoy.restApplication.controller;
 
 import com.tsoy.restApplication.Models.Person;
-import com.tsoy.restApplication.Models.PhoneBook;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.tsoy.restApplication.repo.Repository;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("/")
+@RequestMapping("/persons")
 public class PersonController {
 
-    PhoneBook phoneBook1 = new PhoneBook(1, "123", "doggo1");
-    PhoneBook phoneBook2 = new PhoneBook(2, "1234", "doggo2");
-    PhoneBook phoneBook3 = new PhoneBook(3, "12345", "doggo3");
-    PhoneBook phoneBook4 = new PhoneBook(4, "123456", "doggo4");
-    PhoneBook phoneBook5 = new PhoneBook(5, "1234567", "doggo5");
-    PhoneBook phoneBook6 = new PhoneBook(6, "12345678", "doggo6");
+    Repository repo = new Repository();
 
-    Person person1 = new Person(1, "Vasya", new ArrayList<>(){{
-        add(phoneBook1);
-        add(phoneBook2);
-        add(phoneBook3);
-    }});
-    Person person2 = new Person(2, "Petya", new ArrayList<>(){{
-        add(phoneBook4);
-        add(phoneBook5);
-        add(phoneBook6);
-    }});
-
-    public List<Person> persons = new ArrayList<>(){{
-        add(person1);
-        add(person2);
-    }};
-
-    public List<PhoneBook> phoneBooks = new ArrayList<>(){{
-        add(phoneBook1);
-        add(phoneBook2);
-        add(phoneBook3);
-        add(phoneBook4);
-        add(phoneBook5);
-        add(phoneBook6);
-    }};
-
-    @GetMapping("/persons")
+    @GetMapping("/allPersons")
     public List<Person> persons(){
-        return persons;
+        return repo.persons();
     }
 
-    @GetMapping("/id/{id}")
-    public Person getById(@PathVariable(value = "id") long id){
-        return persons.stream()
-                .filter(person -> person.getId() == id)
-                .findFirst()
-                .orElseThrow();
+    @RequestMapping("/personName")
+    public Person byName(@RequestParam(value = "name") String name){
+        return repo.personByName(name);
     }
 
-    @GetMapping("/name/{name}")
-    public Person getByName(@PathVariable(value = "name") String name){
-        return persons.stream()
-                .filter(person -> person.getName().equals(name))
-                .findFirst()
-                .orElseThrow();
+    @RequestMapping("/personId")
+    public Person byId(@RequestParam(value = "id") long id){
+        return repo.personById(id);
     }
 
-    @GetMapping("/contactId/{contactId}")
-    public PhoneBook getByContactId(@PathVariable(value = "contactId") long contactId){
-        return phoneBooks.stream()
-                .filter(phonebook -> phonebook.getContactId() == contactId)
-                .findFirst()
-                .orElseThrow();
+    @PostMapping("/deletePerson")
+    public void deletePerson(
+            @RequestParam(value = "id") long id){
+        repo.deletePerson(byId(id));
     }
 
-    @GetMapping("/number/{number}")
-    public PhoneBook getByNumber(@PathVariable(value = "number") String number){
-        return phoneBooks.stream()
-                .filter(phonebook -> phonebook.getNumber().equals(number))
-                .findFirst()
-                .orElseThrow();
+    @PostMapping("/updatePerson")
+    public Person createPerson(
+            @RequestParam(value = "id") long id,
+            @RequestParam(value = "name") String name){
+        Person person = repo.personById(id);
+        if (person == null){
+            return repo.createPerson(new Person(id, name, new ArrayList<>()));
+        }
+        else {
+            person.setName(name);
+            return person;
+        }
     }
 }
