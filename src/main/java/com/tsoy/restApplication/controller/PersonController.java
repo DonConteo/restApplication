@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("person")
@@ -24,7 +25,7 @@ public class PersonController {
         return personService.create(name);
     }
 
-    @GetMapping("/get/{id}")
+    @GetMapping("/getbyid/{id}")
     public ResponseEntity<Person> getById(@PathVariable long id){
         Person person = personService.getById(id);
         return person != null
@@ -41,13 +42,9 @@ public class PersonController {
     }
 
     @GetMapping("getall")
-    public ResponseEntity<List<Person>> getAllPerson(){
-//        Person person = personService.getById(id);
-        List<Person> lp = new ArrayList<>();
-//        return person != null
-//                ? new ResponseEntity<>(>, HttpStatus.OK)
-//                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        return new ResponseEntity<>(lp, HttpStatus.OK);
+    public List<Person> getAllPerson(){
+        return personService.getAllPerson();
+
     }
 
     @GetMapping("deletePerson/{id}")

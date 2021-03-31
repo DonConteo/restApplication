@@ -3,6 +3,7 @@ package com.tsoy.restApplication.repo;
 import com.tsoy.restApplication.model.Person;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,7 +41,21 @@ public class PersonRepository{
         return person;
     }
 
+    public List<Person> getAllPerson(List<Person> list){
+        for (Map.Entry<Long, Person> entry : PERSON_REPOSITORY_MAP.entrySet()){
+            Person person = entry.getValue();
+            list.add(person);
+        }
+        return list;
+    }
+
     public boolean delete(int id) {
         return PERSON_REPOSITORY_MAP.remove(id) != null;
+    }
+
+    public void deleteAll() {
+        for (Map.Entry<Long, Person> entry : PERSON_REPOSITORY_MAP.entrySet()){
+            PERSON_REPOSITORY_MAP.remove(entry);
+        }
     }
 }

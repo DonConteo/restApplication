@@ -30,4 +30,9 @@ public class PersonService {
     public Person getByName(String name) {
         return personRepository.getByName(name);
     }
+
+    public List<Person> getAllPerson(){
+        List<Person> list = new ArrayList<>();
+        return personRepository.getAllPerson(list);
+    }
 }
