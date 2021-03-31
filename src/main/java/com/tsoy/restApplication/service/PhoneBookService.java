@@ -20,8 +20,4 @@ public class PhoneBookService {
         long pbNewId = person.getPhoneBook().get(0);
         phoneBookRepository.getById(pbNewId).getRecords().put(name, phone);
     }
-
-//    public PhoneBook create(long id) {
-//        return phoneBookRepository.create(personService.getById(id));
-//    }
 }

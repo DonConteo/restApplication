@@ -16,11 +16,6 @@ public class PhoneBookController {
         this.personService = personService;
     }
 
-//    @GetMapping("new/{personid}")
-//    public PhoneBook create(@PathVariable long personid){
-//        return phoneBookService.create(personid);
-//    }
-
     @GetMapping("add/{person}/{phonebook}/{name}/{phone}")
     public void addRecord(@PathVariable long person,
                           @PathVariable String name,

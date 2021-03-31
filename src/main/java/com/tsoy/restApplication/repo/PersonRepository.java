@@ -49,8 +49,8 @@ public class PersonRepository{
         return list;
     }
 
-    public boolean delete(int id) {
-        return PERSON_REPOSITORY_MAP.remove(id) != null;
+    public void delete(long id) {
+        PERSON_REPOSITORY_MAP.remove(id);
     }
 
     public void deleteAll() {

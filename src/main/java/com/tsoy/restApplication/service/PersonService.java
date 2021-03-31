@@ -35,4 +35,12 @@ public class PersonService {
         List<Person> list = new ArrayList<>();
         return personRepository.getAllPerson(list);
     }
+
+    public void delete(long id){
+        personRepository.delete(id);
+    }
+
+    public void deleteAll(){
+        personRepository.deleteAll();
+    }
 }

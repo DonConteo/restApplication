@@ -20,12 +20,12 @@ public class PersonController {
         this.personService = personService;
     }
 
-    @GetMapping("/new/{name}")
+    @GetMapping("new/{name}")
     public Person createPerson(@PathVariable String name){
         return personService.create(name);
     }
 
-    @GetMapping("/getbyid/{id}")
+    @GetMapping("getbyid/{id}")
     public ResponseEntity<Person> getById(@PathVariable long id){
         Person person = personService.getById(id);
         return person != null
@@ -42,19 +42,22 @@ public class PersonController {
     }
 
     @GetMapping("getall")
-    public List<Person> getAllPerson(){
-        return personService.getAllPerson();
-
+    public ResponseEntity<List<Person>> getAllPerson() {
+        List<Person> lp = personService.getAllPerson();
+        return lp.isEmpty()
+                ? new ResponseEntity<>(HttpStatus.NOT_FOUND)
+                : new ResponseEntity<>(lp, HttpStatus.OK);
     }
 
-    @GetMapping("deletePerson/{id}")
+    @GetMapping("deleteperson/{id}")
     public ResponseEntity deletePerson(@PathVariable long id){
+        personService.delete(id);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("deleteall")
     public ResponseEntity deleteAll(){
+        personService.deleteAll();
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
-
 }
