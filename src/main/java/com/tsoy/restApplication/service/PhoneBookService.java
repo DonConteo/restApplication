@@ -19,10 +19,8 @@ public class PhoneBookService {
     }
 
     public void addRecord(long id, String name, String phone) {
-        Person person = personService.getById(id);
         final long recordId = RECORD_ID.incrementAndGet();
-        Record record = new Record(name, phone);
-        person.getPhoneBook().getRecords().put(recordId, record);
+        personService.getById(id).getPhoneBook().getRecords().put(recordId, new Record(name, phone));
     }
 
     public void deleteRecord(Person person, long id){
