@@ -25,14 +25,14 @@ public class PhoneBookController {
                                             @PathVariable String phone,
                                             @PathVariable String name){
         phoneBookService.addRecord(id, phone, name);
-        return new ResponseEntity<>(personService.getById(id), HttpStatus.OK);
+        return new ResponseEntity<>(personService.getUser(id), HttpStatus.OK);
     }
 
     @GetMapping("updatename/{personid}/{recordid}/{newname}")
     public ResponseEntity<Person> updateRecordName(@PathVariable long personid,
                                                @PathVariable long recordid,
                                                @PathVariable String newname){
-        Person person = personService.getById(personid);
+        Person person = personService.getUser(personid);
         Record record = person.getPhoneBook().getRecords().get(recordid);
         if (record != null) {
             phoneBookService.updateRecordName(record, newname);
@@ -46,7 +46,7 @@ public class PhoneBookController {
     public ResponseEntity<Person> updateRecordNumber(@PathVariable long personid,
                                                @PathVariable long recordid,
                                                @PathVariable String newnumber){
-        Person person = personService.getById(personid);
+        Person person = personService.getUser(personid);
         Record record = person.getPhoneBook().getRecords().get(recordid);
         if (record != null) {
             phoneBookService.updateRecordNumber(record, newnumber);
@@ -59,7 +59,7 @@ public class PhoneBookController {
     @GetMapping("delete/{personid}/{recordid}")
     public ResponseEntity<Person> deleteRecord(@PathVariable long personid,
                                                @PathVariable long recordid){
-        Person person = personService.getById(personid);
+        Person person = personService.getUser(personid);
         phoneBookService.deleteRecord(person, recordid);
         return person != null
                 ? new ResponseEntity<>(person, HttpStatus.OK)

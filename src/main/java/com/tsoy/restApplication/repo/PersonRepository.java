@@ -28,11 +28,11 @@ public class PersonRepository{
         return PERSON_REPOSITORY_MAP.get(clientId);
     }
 
-    public Person getById(long id) {
+    public Person getUser(long id) {
         return PERSON_REPOSITORY_MAP.get(id);
     }
 
-    public Person getByName(String name) {
+    public Person getUser(String name) {
         Person person = null;
         for (Map.Entry<Long, Person> entry : PERSON_REPOSITORY_MAP.entrySet()){
             if (entry.getValue().getName().equalsIgnoreCase(name)){

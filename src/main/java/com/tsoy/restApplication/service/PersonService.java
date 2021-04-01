@@ -23,12 +23,12 @@ public class PersonService {
         return personRepository.create(person);
     }
 
-    public Person getById(long id) {
-        return personRepository.getById(id);
+    public Person getUser(long id) {
+        return personRepository.getUser(id);
     }
 
-    public Person getByName(String name) {
-        return personRepository.getByName(name);
+    public Person getUser(String name) {
+        return personRepository.getUser(name);
     }
 
     public List<Person> getAllPerson(){

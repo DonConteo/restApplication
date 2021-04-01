@@ -20,7 +20,7 @@ public class PhoneBookService {
 
     public void addRecord(long id, String name, String phone) {
         final long recordId = RECORD_ID.incrementAndGet();
-        personService.getById(id).getPhoneBook().getRecords().put(recordId, new Record(name, phone));
+        personService.getUser(id).getPhoneBook().getRecords().put(recordId, new Record(name, phone));
     }
 
     public void updateRecordName(Record record, String name){

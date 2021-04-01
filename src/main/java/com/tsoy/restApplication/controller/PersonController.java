@@ -14,20 +14,20 @@ import java.util.Map;
 @RequestMapping("person")
 public class PersonController {
 
-    private PersonService personService;
+    private static PersonService personService;
 
     public PersonController(PersonService personService) {
         this.personService = personService;
     }
 
     @GetMapping("new/{name}")
-    public Person createPerson(@PathVariable String name){
+    public static Person createPerson(@PathVariable String name){
         return personService.create(name);
     }
 
     @GetMapping("getbyid/{id}")
-    public ResponseEntity<Person> getById(@PathVariable long id){
-        Person person = personService.getById(id);
+    public static ResponseEntity<Person> getById(@PathVariable long id){
+        Person person = personService.getUser(id);
         return person != null
                 ? new ResponseEntity<>(person, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -35,7 +35,7 @@ public class PersonController {
 
     @GetMapping("getbyname/{name}")
     public ResponseEntity<Person> getByName(@PathVariable String name){
-        Person person = personService.getByName(name);
+        Person person = personService.getUser(name);
         return person != null
                 ? new ResponseEntity<>(person, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -52,11 +52,11 @@ public class PersonController {
     @GetMapping("update/{id}/{newname}")
     public ResponseEntity<Person> updatePerson(@PathVariable long id,
                                                @PathVariable String newname){
-        if (personService.getById(id) != null) {
+        if (personService.getUser(id) != null) {
             personService.updatePerson(id, newname);
         }
-        return personService.getById(id) != null
-                ? new ResponseEntity<>(personService.getById(id), HttpStatus.OK)
+        return personService.getUser(id) != null
+                ? new ResponseEntity<>(personService.getUser(id), HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
