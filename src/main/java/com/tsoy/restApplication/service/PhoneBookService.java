@@ -23,15 +23,15 @@ public class PhoneBookService {
         personService.getById(id).getPhoneBook().getRecords().put(recordId, new Record(name, phone));
     }
 
-    public void deleteRecord(Person person, long id){
-        person.getPhoneBook().getRecords().entrySet().removeIf(entry -> id == entry.getKey());
-    }
-
     public void updateRecordName(Record record, String name){
         record.setName(name);
     }
 
     public void updateRecordNumber(Record record, String number){
         record.setNumber(number);
+    }
+
+    public void deleteRecord(Person person, long id){
+        person.getPhoneBook().getRecords().entrySet().removeIf(entry -> id == entry.getKey());
     }
 }
