@@ -50,6 +50,10 @@ public class PersonRepository{
         return list;
     }
 
+    public void updatePerson(long id, String name){
+        PERSON_REPOSITORY_MAP.get(id).setName(name);
+    }
+
     public void delete(long id) {
         PERSON_REPOSITORY_MAP.remove(id);
     }

@@ -49,6 +49,17 @@ public class PersonController {
                 : new ResponseEntity<>(lp, HttpStatus.OK);
     }
 
+    @GetMapping("update/{id}/{newname}")
+    public ResponseEntity<Person> updatePerson(@PathVariable long id,
+                                               @PathVariable String newname){
+        if (personService.getById(id) != null) {
+            personService.updatePerson(id, newname);
+        }
+        return personService.getById(id) != null
+                ? new ResponseEntity<>(personService.getById(id), HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
     @GetMapping("delete/{id}")
     public ResponseEntity deletePerson(@PathVariable long id){
         personService.delete(id);

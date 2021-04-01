@@ -4,16 +4,16 @@ import java.util.Map;
 
 public class PhoneBook {
 
-    Map<String, String> records;
+    Map<Long, Record> records;
 
-    public PhoneBook(Map<String, String> records) {
+    public PhoneBook(Map<Long, Record> records) {
         this.records = records;
     }
 
-    public Map<String, String> getRecords() {
+    public Map<Long, Record> getRecords() {
         return records;
     }
-    public void setRecords(Map<String, String> records) {
+    public void setRecords(Map<Long, Record> records) {
         this.records = records;
     }
 }

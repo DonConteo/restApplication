@@ -17,8 +17,8 @@ public class PhoneBookRepository {
     private static final List<PhoneBook> PHONEBOOK_REPOSITORY_MAP = new ArrayList<>();
 
     public PhoneBook create() {
-        PhoneBook pbNew = new PhoneBook(new HashMap<>());
-        PHONEBOOK_REPOSITORY_MAP.add(pbNew);
-        return pbNew;
+        PhoneBook phoneBook = new PhoneBook(new HashMap<>());
+        PHONEBOOK_REPOSITORY_MAP.add(phoneBook);
+        return phoneBook;
     }
 }

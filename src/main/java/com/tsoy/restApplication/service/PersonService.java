@@ -36,6 +36,10 @@ public class PersonService {
         return personRepository.getAllPerson(list);
     }
 
+    public void updatePerson(long id, String name){
+        personRepository.updatePerson(id, name);
+    }
+
     public void delete(long id){
         personRepository.delete(id);
     }

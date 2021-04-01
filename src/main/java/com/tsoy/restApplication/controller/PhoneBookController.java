@@ -1,6 +1,7 @@
 package com.tsoy.restApplication.controller;
 
 import com.tsoy.restApplication.model.Person;
+import com.tsoy.restApplication.model.Record;
 import com.tsoy.restApplication.service.PersonService;
 import com.tsoy.restApplication.service.PhoneBookService;
 import org.springframework.http.HttpStatus;
@@ -27,5 +28,41 @@ public class PhoneBookController {
         return new ResponseEntity<>(personService.getById(id), HttpStatus.OK);
     }
 
-    @GetMapping("update/{id}/")
+    @GetMapping("updatename/{personid}/{recordid}/{newname}")
+    public ResponseEntity<Person> updateRecordName(@PathVariable long personid,
+                                               @PathVariable long recordid,
+                                               @PathVariable String newname){
+        Person person = personService.getById(personid);
+        Record record = person.getPhoneBook().getRecords().get(recordid);
+        if (record != null) {
+            phoneBookService.updateRecordName(record, newname);
+        }
+        return record != null
+                ? new ResponseEntity<>(person, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("updatenumber/{personid}/{recordid}/{newnumber}")
+    public ResponseEntity<Person> updateRecordNumber(@PathVariable long personid,
+                                               @PathVariable long recordid,
+                                               @PathVariable String newnumber){
+        Person person = personService.getById(personid);
+        Record record = person.getPhoneBook().getRecords().get(recordid);
+        if (record != null) {
+            phoneBookService.updateRecordNumber(record, newnumber);
+        }
+        return record != null
+                ? new ResponseEntity<>(person, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
+
+    @GetMapping("delete/{personid}/{recordid}")
+    public ResponseEntity<Person> deleteRecord(@PathVariable long personid,
+                                               @PathVariable long recordid){
+        Person person = personService.getById(personid);
+        phoneBookService.deleteRecord(person, recordid);
+        return person != null
+                ? new ResponseEntity<>(person, HttpStatus.OK)
+                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    }
 }
