@@ -1,7 +1,10 @@
 package com.tsoy.restApplication.controller;
 
+import com.tsoy.restApplication.model.Person;
 import com.tsoy.restApplication.service.PersonService;
 import com.tsoy.restApplication.service.PhoneBookService;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -16,12 +19,13 @@ public class PhoneBookController {
         this.personService = personService;
     }
 
-    @GetMapping("add/{person}/{phonebook}/{name}/{phone}")
-    public void addRecord(@PathVariable long person,
-                          @PathVariable String name,
-                          @PathVariable String phone){
-        phoneBookService.addRecord(person, name, phone);
+    @GetMapping("add/{id}/{phone}/{name}")
+    public ResponseEntity<Person> addRecord(@PathVariable long id,
+                                            @PathVariable String phone,
+                                            @PathVariable String name){
+        phoneBookService.addRecord(id, phone, name);
+        return new ResponseEntity<>(personService.getById(id), HttpStatus.OK);
     }
 
-
+    @GetMapping("update/{id}/")
 }

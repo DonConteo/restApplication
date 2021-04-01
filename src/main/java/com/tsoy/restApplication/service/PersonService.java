@@ -39,8 +39,4 @@ public class PersonService {
     public void delete(long id){
         personRepository.delete(id);
     }
-
-    public void deleteAll(){
-        personRepository.deleteAll();
-    }
 }

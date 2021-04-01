@@ -1,6 +1,7 @@
 package com.tsoy.restApplication.repo;
 
 import com.tsoy.restApplication.model.Person;
+import com.tsoy.restApplication.model.PhoneBook;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class PersonRepository{
     public Person create(Person person) {
         final long clientId = PERSON_ID.incrementAndGet();
         person.setId(clientId);
-        person.setPhoneBook(List.of (phoneBookRepository.create().getId()));
+        person.setPhoneBook(phoneBookRepository.create());
         PERSON_REPOSITORY_MAP.put(clientId, person);
         return PERSON_REPOSITORY_MAP.get(clientId);
     }
@@ -51,11 +52,5 @@ public class PersonRepository{
 
     public void delete(long id) {
         PERSON_REPOSITORY_MAP.remove(id);
-    }
-
-    public void deleteAll() {
-        for (Map.Entry<Long, Person> entry : PERSON_REPOSITORY_MAP.entrySet()){
-            PERSON_REPOSITORY_MAP.remove(entry);
-        }
     }
 }

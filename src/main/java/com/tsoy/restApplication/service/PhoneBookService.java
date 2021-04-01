@@ -2,6 +2,7 @@ package com.tsoy.restApplication.service;
 
 import com.tsoy.restApplication.model.Person;
 import com.tsoy.restApplication.model.PhoneBook;
+import com.tsoy.restApplication.repo.PersonRepository;
 import com.tsoy.restApplication.repo.PhoneBookRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,9 +16,8 @@ public class PhoneBookService {
         this.personService = personService;
     }
 
-    public void addRecord(long personId, String name, String phone) {
-        Person person = personService.getById(personId);
-        long pbNewId = person.getPhoneBook().get(0);
-        phoneBookRepository.getById(pbNewId).getRecords().put(name, phone);
+    public void addRecord(long id, String phone, String name) {
+        Person person = personService.getById(id);
+        person.getPhoneBook().getRecords().put(phone, name);
     }
 }

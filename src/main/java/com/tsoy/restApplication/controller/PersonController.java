@@ -49,15 +49,9 @@ public class PersonController {
                 : new ResponseEntity<>(lp, HttpStatus.OK);
     }
 
-    @GetMapping("deleteperson/{id}")
+    @GetMapping("delete/{id}")
     public ResponseEntity deletePerson(@PathVariable long id){
         personService.delete(id);
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    }
-
-    @GetMapping("deleteall")
-    public ResponseEntity deleteAll(){
-        personService.deleteAll();
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

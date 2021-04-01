@@ -6,8 +6,7 @@ public class Person {
 
     private long id;
     private String name;
-
-    private List<Long> phoneBook;
+    private PhoneBook phoneBook;
 
     public Person(String name) {
         this.name = name;
@@ -27,11 +26,11 @@ public class Person {
         this.name = name;
     }
 
-    public List<Long> getPhoneBook() {
+    public PhoneBook getPhoneBook() {
         return phoneBook;
     }
 
-    public void setPhoneBook(List<Long> pbNew) {
+    public void setPhoneBook(PhoneBook pbNew) {
         this.phoneBook = pbNew;
     }
 }
