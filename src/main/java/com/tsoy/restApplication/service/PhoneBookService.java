@@ -34,4 +34,10 @@ public class PhoneBookService {
     public void deleteRecord(Person person, long id){
         person.getPhoneBook().getRecords().entrySet().removeIf(entry -> id == entry.getKey());
     }
+
+    public boolean cleanAllRecord(long i) {
+//        if ()
+        personService.getUser(i).getPhoneBook().getRecords().clear();
+        return personService.getUser(i).getPhoneBook().getRecords().isEmpty();
+    }
 }

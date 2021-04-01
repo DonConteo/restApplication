@@ -61,8 +61,6 @@ public class PhoneBookController {
                                                @PathVariable long recordid){
         Person person = personService.getUser(personid);
         phoneBookService.deleteRecord(person, recordid);
-        return person != null
-                ? new ResponseEntity<>(person, HttpStatus.OK)
-                : new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(person, HttpStatus.OK);
     }
 }
