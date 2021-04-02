@@ -23,11 +23,11 @@ public class PersonService {
         return personRepository.create(person);
     }
 
-    public Person getUser(long id) {
+    public Person getPerson(long id) {
         return personRepository.getUser(id);
     }
 
-    public Person getUser(String name) {
+    public Person getPerson(String name) {
         return personRepository.getUser(name);
     }
 
@@ -40,7 +40,7 @@ public class PersonService {
         personRepository.updatePerson(id, name);
     }
 
-    public void delete(long id){
+    public void deletePerson(long id){
         personRepository.delete(id);
     }
 }

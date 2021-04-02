@@ -6,9 +6,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("person")
@@ -21,13 +19,13 @@ public class PersonController {
     }
 
     @GetMapping("new/{name}")
-    public static Person createPerson(@PathVariable String name){
+    public Person createPerson(@PathVariable String name){
         return personService.create(name);
     }
 
     @GetMapping("getbyid/{id}")
-    public static ResponseEntity<Person> getById(@PathVariable long id){
-        Person person = personService.getUser(id);
+    public ResponseEntity<Person> getById(@PathVariable long id){
+        Person person = personService.getPerson(id);
         return person != null
                 ? new ResponseEntity<>(person, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -35,7 +33,7 @@ public class PersonController {
 
     @GetMapping("getbyname/{name}")
     public ResponseEntity<Person> getByName(@PathVariable String name){
-        Person person = personService.getUser(name);
+        Person person = personService.getPerson(name);
         return person != null
                 ? new ResponseEntity<>(person, HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -52,17 +50,17 @@ public class PersonController {
     @GetMapping("update/{id}/{newname}")
     public ResponseEntity<Person> updatePerson(@PathVariable long id,
                                                @PathVariable String newname){
-        if (personService.getUser(id) != null) {
+        if (personService.getPerson(id) != null) {
             personService.updatePerson(id, newname);
         }
-        return personService.getUser(id) != null
-                ? new ResponseEntity<>(personService.getUser(id), HttpStatus.OK)
+        return personService.getPerson(id) != null
+                ? new ResponseEntity<>(personService.getPerson(id), HttpStatus.OK)
                 : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
     @GetMapping("delete/{id}")
     public ResponseEntity deletePerson(@PathVariable long id){
-        personService.delete(id);
+        personService.deletePerson(id);
         return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 }

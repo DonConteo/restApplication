@@ -20,7 +20,11 @@ public class PhoneBookService {
 
     public void addRecord(long id, String name, String phone) {
         final long recordId = RECORD_ID.incrementAndGet();
-        personService.getUser(id).getPhoneBook().getRecords().put(recordId, new Record(name, phone));
+        personService.getPerson(id).getPhoneBook().getRecords().put(recordId, new Record(name, phone));
+    }
+
+    public Record getRecord(long personid, long  recordid) {
+        return personService.getPerson(personid).getPhoneBook().getRecords().get(recordid);
     }
 
     public void updateRecordName(Record record, String name){
@@ -36,8 +40,7 @@ public class PhoneBookService {
     }
 
     public boolean cleanAllRecord(long i) {
-//        if ()
-        personService.getUser(i).getPhoneBook().getRecords().clear();
-        return personService.getUser(i).getPhoneBook().getRecords().isEmpty();
+        personService.getPerson(i).getPhoneBook().getRecords().clear();
+        return personService.getPerson(i).getPhoneBook().getRecords().isEmpty();
     }
 }
