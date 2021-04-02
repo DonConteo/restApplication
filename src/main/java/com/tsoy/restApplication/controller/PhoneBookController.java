@@ -28,7 +28,7 @@ public class PhoneBookController {
         return new ResponseEntity<>(personService.getPerson(id), HttpStatus.OK);
     }
 
-    @GetMapping("getrecord/{personid}/{recordid}/")
+    @GetMapping("getrecord/{personid}/{recordid}")
     public ResponseEntity<Record> getRecord(@PathVariable long personid,
                                             @PathVariable long recordid){
         Record record = phoneBookService.getRecord(personid, recordid);
